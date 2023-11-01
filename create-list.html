@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Injury Tracking System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body class="d-flex flex-column min-vh-100">
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="welcome.html">Injury Tracking System</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="welcome.html">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="create-list.html">Create List</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="report-list.html">Report List</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="about.html">About</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+<body class="container mt-4">
+    <h2>Create Injury Report</h2>
+    <form onsubmit="saveData(event)">
+        <div class="form-group">
+            <label for="reporterName">Name of Reporter:</label>
+            <input type="text" id="reporterName" name="reporterName" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="dateTimeOfInjury">Date & Time of Injury:</label>
+            <input type="datetime-local" id="dateTimeOfInjury" name="dateTimeOfInjury" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="bodyMap">Body Map:</label>
+            <input type="text" id="bodyMap" name="bodyMap" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Create Report</button>
+        
+    </form>
+
+    <script>
+        function saveData(event) {
+            event.preventDefault();
+            const reporterName = document.getElementById('reporterName').value;
+            const dateTimeOfInjury = document.getElementById('dateTimeOfInjury').value;
+            const bodyMap = document.getElementById('bodyMap').value;
+
+            const reportData = {
+                reporterName: reporterName,
+                dateTimeOfInjury: dateTimeOfInjury,
+                bodyMap: bodyMap
+            };
+
+            let reports = JSON.parse(localStorage.getItem('reports')) || [];
+            reports.push(reportData);
+            localStorage.setItem('reports', JSON.stringify(reports));
+
+            alert('Report created successfully');
+        }
+        
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
